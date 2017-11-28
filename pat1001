@@ -1,0 +1,94 @@
+## Welcome to GitHub Pages
+
+1001. A+B Format (20)
+
+Calculate a + b and output the sum in standard format -- that is, the digits must be separated into groups of three by commas (unless there are less than four digits).
+
+Input
+Each input file contains one test case. Each case contains a pair of integers a and b where -1000000 <= a, b <= 1000000.
+The numbers are separated by a space.
+
+Output
+
+For each test case, you should output the sum of a and b in one line. The sum must be written in the standard format.
+Sample Input
+-1000000 9
+Sample Output
+-999,991
+思路：将a和b相加得到的结果，依次求余temp！=0得到个位数.存入List(动态加入)，每存3位加入一个',',最后反向输出。
+注意的是求余判别是10023易容易判别为1，0，0，23
+
+
+
+### Markdown
+```
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Object> outList = new ArrayList<>();
+        int a, b, sum, count;
+        a = sc.nextInt();
+        b = sc.nextInt();
+        sum = a + b;
+        int temp = sum;
+        if (temp < 0) temp = -temp;
+        outList.add(temp % 10);
+        temp = temp / 10;
+        count = 1;
+        while (temp % 10 != 0||temp>0) {
+            if (count % 3 != 0) {
+                outList.add(temp % 10);
+                count++;
+                temp = temp / 10;
+            } else {
+                outList.add(',');
+                outList.add(temp % 10);
+                temp = temp / 10;
+                count++;
+            }
+
+        }
+        if (sum < 0)
+            outList.add('-');
+        int lenth = outList.size();
+
+
+        for (int index = lenth - 1; index >= 0; index--) {
+            System.out.print(outList.get(index));
+
+
+        }
+    }
+}
+
+```markdown
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
+
+**Bold** and _Italic_ and `Code` text
+
+[Link](url) and ![Image](src)
+```
+
+For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
+### Jekyll Themes
+
+Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/CHL93/Algorithm/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+
+### Support or Contact
+
+Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
